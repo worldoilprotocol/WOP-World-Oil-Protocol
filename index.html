@@ -1,0 +1,1715 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="WOP — World Oil Protocol. Energy. Data. Blockchain.">
+<meta name="theme-color" content="#07090d">
+<title>WOP — World Oil Protocol</title>
+
+<style>
+:root{
+  --bg:#07090d;
+  --panel:#0e131b;
+  --panel2:#111824;
+  --text:#f5f7fb;
+  --muted:#9ca7b7;
+  --gold:#d6a84f;
+  --gold2:#f0c96b;
+  --blue:#5aa9ff;
+  --line:rgba(255,255,255,.09);
+}
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 80% 0%,rgba(214,168,79,.12),transparent 28%),
+    var(--bg);
+  color:var(--text);
+  font:16px/1.6 Arial,Helvetica,sans-serif;
+}
+a{color:inherit;text-decoration:none}
+.container{width:min(1160px,92%);margin:auto}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(7,9,13,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.brand{
+  font-weight:900;
+  letter-spacing:2px;
+  font-size:21px;
+}
+.brand span{
+  display:block;
+  color:var(--gold2);
+  font-size:9px;
+  letter-spacing:1.5px;
+}
+nav{
+  display:flex;
+  gap:15px;
+  align-items:center;
+}
+nav a{
+  font-size:11px;
+  font-weight:800;
+  color:var(--muted);
+}
+nav a:hover{color:var(--gold2)}
+.menu{
+  display:none;
+  background:none;
+  border:1px solid var(--line);
+  color:white;
+  border-radius:8px;
+  padding:8px 11px;
+  cursor:pointer;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--gold);
+  border-radius:10px;
+  padding:11px 17px;
+  font-size:12px;
+  font-weight:900;
+  background:rgba(214,168,79,.08);
+  transition:.2s ease;
+}
+.btn:hover{
+  background:rgba(214,168,79,.2);
+  transform:translateY(-1px);
+}
+.blue{border-color:var(--blue)}
+
+.hero{
+  min-height:690px;
+  padding:95px 50px 75px;
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:50px;
+  align-items:center;
+}
+.eyebrow,.kicker{
+  color:var(--gold2);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:2.5px;
+}
+h1{
+  font-size:clamp(48px,7vw,78px);
+  line-height:.97;
+  letter-spacing:-3px;
+  margin:14px 0;
+}
+h1 span{color:var(--gold2)}
+h2{
+  font-size:clamp(30px,4vw,45px);
+  line-height:1.1;
+  margin:0 0 14px;
+}
+h3{margin:0 0 8px}
+.lead{
+  font-size:18px;
+  color:#c5cdd9;
+  max-width:760px;
+}
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:26px 0;
+}
+.badges{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+.badge{
+  border:1px solid var(--line);
+  padding:5px 9px;
+  border-radius:99px;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+}
+
+.orb{
+  width:min(390px,78vw);
+  aspect-ratio:1;
+  margin:auto;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(214,168,79,.4);
+  background:
+    radial-gradient(circle,rgba(214,168,79,.12),rgba(214,168,79,.02) 65%,transparent 75%);
+  box-shadow:0 0 90px rgba(214,168,79,.12);
+  position:relative;
+  overflow:hidden;
+}
+.orb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+  border-radius:50%;
+  display:block;
+}
+
+section{
+  padding:82px 0;
+  border-top:1px solid var(--line);
+}
+.section-head{
+  max-width:820px;
+  margin-bottom:35px;
+}
+.grid{display:grid;gap:16px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+.card{
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:23px;
+}
+.card p{
+  color:var(--muted);
+  margin:0;
+}
+.icon{font-size:27px}
+
+.note{
+  margin-top:18px;
+  padding:16px 18px;
+  border-left:3px solid var(--gold);
+  border-radius:0 12px 12px 0;
+  background:rgba(214,168,79,.06);
+  color:#c8cfda;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.stat{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:19px;
+}
+.stat small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.4px;
+}
+.stat strong{
+  display:block;
+  margin-top:4px;
+  font-size:19px;
+}
+
+.eco{
+  display:grid;
+  grid-template-columns:1fr 1.2fr 1fr;
+  gap:14px;
+  align-items:center;
+}
+.eco-side{display:grid;gap:14px}
+.eco-main{
+  padding:32px;
+  text-align:center;
+  border:1px solid rgba(214,168,79,.5);
+  border-radius:21px;
+  background:rgba(214,168,79,.07);
+}
+.eco-card{
+  padding:19px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:var(--panel);
+}
+
+.table{
+  overflow:auto;
+  border:1px solid var(--line);
+  border-radius:15px;
+}
+.table table{
+  width:100%;
+  min-width:650px;
+  border-collapse:collapse;
+}
+.table th,.table td{
+  text-align:left;
+  padding:13px 15px;
+  border-bottom:1px solid var(--line);
+}
+.table th{
+  color:var(--gold2);
+  font-size:10px;
+  letter-spacing:1px;
+}
+.table td{color:#d6dce5}
+.bar{
+  height:8px;
+  background:#1b222d;
+  border-radius:99px;
+  overflow:hidden;
+}
+.bar i{
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+}
+
+.roadmap{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.phase{min-height:235px}
+.phase-no{
+  color:var(--gold2);
+  font-weight:900;
+  font-size:11px;
+  letter-spacing:1.5px;
+}
+.phase ul{
+  padding-left:18px;
+  color:var(--muted);
+  margin-bottom:0;
+}
+.phase li{margin:4px 0}
+
+.faq details{
+  padding:16px 0;
+  border-bottom:1px solid var(--line);
+}
+.faq summary{
+  cursor:pointer;
+  font-weight:800;
+}
+.faq p{
+  color:var(--muted);
+  max-width:850px;
+}
+
+.risk{
+  font-size:12px;
+  color:#9ba4b2;
+}
+
+.footer{
+  padding:55px 0 24px;
+  border-top:1px solid var(--line);
+}
+.footergrid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;
+  gap:35px;
+}
+.links{
+  display:grid;
+  gap:7px;
+}
+.links a{
+  font-size:13px;
+  color:var(--muted);
+}
+.links a:hover{color:var(--gold2)}
+.copy{
+  margin-top:35px;
+  padding-top:17px;
+  border-top:1px solid var(--line);
+  font-size:11px;
+  color:#697384;
+}
+
+@media(max-width:900px){
+  nav{display:none}
+  .menu{display:block}
+  .hero{
+    grid-template-columns:1fr;
+    padding-top:65px;
+  }
+  .orb{width:290px}
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .g3,.roadmap,.eco,.footergrid{
+    grid-template-columns:1fr;
+  }
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:560px){
+  .container{width:90%}
+  h1{font-size:47px}
+  .g4,.stats{grid-template-columns:1fr}
+  .hero{
+    min-height:auto;
+    padding-left:20px;
+    padding-right:20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container nav">
+
+<a class="brand" href="#home">
+WOP
+<span>WORLD OIL PROTOCOL</span>
+</a>
+
+<nav id="mainNav">
+<a href="#wop">WOP</a>
+<a href="#token">TOKEN</a>
+<a href="#ecosystem">ECOSYSTEM</a>
+<a href="#wsd">WSD</a>
+<a href="#tokenomics">TOKENOMICS</a>
+<a href="#roadmap">ROADMAP</a>
+<a href="#transparency">TRANSPARENCY</a>
+<a href="#faq">FAQ</a>
+<a class="btn" href="#buy">BUY WOP</a>
+</nav>
+
+<button class="menu" onclick="toggleNav()" aria-label="Open navigation">☰</button>
+
+</div>
+</header>
+
+
+<main id="home">
+
+<!-- HERO -->
+
+<section class="hero">
+<div>
+
+<div class="eyebrow">WORLD OIL PROTOCOL</div>
+
+<h1>
+ENERGY.<br>
+<span>DATA.</span><br>
+BLOCKCHAIN.
+</h1>
+
+<p class="lead">
+A blockchain-based digital ecosystem exploring the connection between global energy,
+market intelligence, digital assets and blockchain technology.
+</p>
+
+<div class="actions">
+<a class="btn" href="#wop">EXPLORE WOP</a>
+
+<a class="btn blue"
+href="https://bscscan.com/address/0x473A59638d6eE968a5594a06f3deA83D52ff19B6"
+target="_blank"
+rel="noopener">
+VIEW CONTRACT ↗
+</a>
+</div>
+
+<div class="badges">
+<span class="badge">BEP-20</span>
+<span class="badge">BNB SMART CHAIN</span>
+<span class="badge">FIXED SUPPLY</span>
+<span class="badge">COMMUNITY DRIVEN</span>
+</div>
+
+</div>
+
+<div class="orb">
+<img src="wop-logo.png" alt="WOP — World Oil Protocol Logo">
+</div>
+
+</section>
+
+
+<!-- ABOUT WOP -->
+
+<section id="wop">
+<div class="container">
+
+<div class="section-head">
+<div class="kicker">01 / ABOUT WOP</div>
+
+<h2>
+A Digital Ecosystem Inspired by Global Energy
+</h2>
+
+<p class="lead">
+World Oil Protocol (WOP) is a blockchain-based digital asset project exploring
+the connection between the global energy sector, digital data and blockchain technology.
+</p>
+</div>
+
+<div class="grid g3">
+
+<div class="card">
+<div class="icon">🌍</div>
+<h3>Global Energy</h3>
+<p>
+The global energy sector connects commodities, production, transportation,
+refining, infrastructure, markets and international trade.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">⛓️</div>
+<h3>Blockchain</h3>
+<p>
+Blockchain introduces programmable digital assets, transparent transactions
+and decentralized infrastructure.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">📊</div>
+<h3>Digital Data</h3>
+<p>
+WOP explores how energy-related information, market intelligence and blockchain
+technology can interact through future digital applications.
+</p>
+</div>
+
+</div>
+
+<div class="note">
+WOP is designed as a digital asset and ecosystem concept. It does not represent
+ownership of physical oil, petroleum reserves, shares of an oil company or a claim
+against commodity reserves.
+</div>
+
+</div>
+</section>
+
+
+<!-- TOKEN -->
+
+<section id="token">
+<div class="container">
+
+<div class="section-head">
+<div class="kicker">02 / THE TOKEN</div>
+<h2>Meet WOP</h2>
+
+<p class="lead">
+WOP is the primary digital asset and ecosystem foundation of World Oil Protocol.
+It is issued as a fixed-supply BEP-20 token on BNB Smart Chain.
+</p>
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<small>NAME</small>
+<strong>World Oil Protocol</strong>
+</div>
+
+<div class="stat">
+<small>SYMBOL</small>
+<strong>WOP</strong>
+</div>
+
+<div class="stat">
+<small>NETWORK</small>
+<strong>BNB Smart Chain</strong>
+</div>
+
+<div class="stat">
+<small>STANDARD</small>
+<strong>BEP-20</strong>
+</div>
+
+<div class="stat">
+<small>TOTAL SUPPLY</small>
+<strong>1,000,000,000 WOP</strong>
+</div>
+
+<div class="stat">
+<small>DECIMALS</small>
+<strong>18</strong>
+</div>
+
+</div>
+
+<div class="card" style="margin-top:14px">
+
+<small style="color:var(--muted)">OFFICIAL CONTRACT ADDRESS</small>
+
+<p style="color:var(--gold2);font-weight:800;word-break:break-all">
+0x473A59638d6eE968a5594a06f3deA83D52ff19B6
+</p>
+
+<div class="actions" style="margin:14px 0 0">
+
+<a class="btn"
+href="https://bscscan.com/address/0x473A59638d6eE968a5594a06f3deA83D52ff19B6"
+target="_blank"
+rel="noopener">
+VIEW ON BSCSCAN ↗
+</a>
+
+</div>
+</div>
+
+</div>
+</section>
+
+
+<!-- ECOSYSTEM -->
+
+<section id="ecosystem">
+<div class="container">
+
+<div class="section-head">
+<div class="kicker">03 / ECOSYSTEM</div>
+<h2>One Vision. Multiple Layers.</h2>
+
+<p class="lead">
+The broader WOP vision may include complementary blockchain, intelligence,
+settlement and experimental concepts developed progressively over time.
+</p>
+</div>
+
+<div class="eco">
+
+<div class="eco-side">
+
+<div class="eco-card">
+<h3>ADV Intelligence</h3>
+<p class="risk">INTELLIGENCE LAYER</p>
+<p>
+An information and intelligence-oriented component exploring selected
+financial, commodity and digital-asset information.
+</p>
+</div>
+
+<div class="eco-card">
+<h3>NOW</h3>
+<p class="risk">EXPERIMENTAL LAYER</p>
+<p>
+An experimental concept for exploring additional blockchain-based
+applications and digital infrastructure.
+</p>
+</div>
+
+</div>
+
+
+<div class="eco-main">
+
+<div class="kicker">ENERGY LAYER</div>
+
+<h2 style="color:var(--gold2)">WOP</h2>
+
+<p>
+World Oil Protocol — the primary energy-sector blockchain project
+and foundation of the ecosystem.
+</p>
+
+</div>
+
+
+<div class="eco-side">
+
+<div class="eco-card">
+<h3>WSD</h3>
+<p class="risk">UTILITY / SETTLEMENT LAYER</p>
+<p>
+World Settlement Digital — a future digital settlement and ecosystem
+utility concept.
+</p>
+</div>
+
+<div class="eco-card">
+<h3>Future Modules</h3>
+<p>
+Additional applications may be introduced as development,
+testing and ecosystem requirements evolve.
+</p>
+</div>
+
+</div>
+
+</div>
+
+<p class="risk" style="margin-top:16px">
+These components have separate identities, functions and development paths.
+Their relationship may evolve as the ecosystem develops.
+</p>
+
+</div>
+</section>
+
+
+<!-- WSD -->
+
+<section id="wsd">
+<div class="container">
+
+<div class="section-head">
+<div class="kicker">04 / WSD</div>
+
+<h2>WORLD SETTLEMENT DIGITAL</h2>
+
+<p class="lead">
+Digital Value. Connected Ecosystems.
+</p>
+</div>
+
+<div class="grid g3">
+
+<div class="card">
+<h3>Future Settlement Concept</h3>
+<p>
+WSD is envisioned as a future digital settlement and ecosystem utility
+concept within the broader WOP ecosystem.
+</p>
+</div>
+
+<div class="card">
+<h3>Separate Identity</h3>
+<p>
+WSD is designed with a distinct role from WOP while remaining conceptually
+connected to the wider ecosystem.
+</p>
+</div>
+
+<div class="card">
+<h3>Future Development</h3>
+<p>
+Future settlement functionality would depend on separate development,
+technical implementation and applicable regulatory requirements.
+</p>
+</div>
+
+</div>
+
+<div class="note">
+WSD is not currently a fiat-backed stablecoin and does not currently represent
+a claim on fiat currency or physical commodities.
+</div>
+
+</div>
+</section>
+
+
+<!-- ADV -->
+
+<section>
+<div class="container">
+
+<div class="section-head">
+<div class="kicker">05 / ADV INTELLIGENCE</div>
+
+<h2>Market Intelligence Layer</h2>
+
+<p class="lead">
+ADV Intelligence is envisioned as an information and intelligence-oriented
+component capable of presenting selected market and financial information.
+</p>
+</div>
+
+<div class="grid g4">
+
+<div class="card">
+<h3>BRENT</h3>
+<p>Energy market information</p>
+</div>
+
+<div class="card">
+<h3>WTI</h3>
+<p>Energy market information</p>
+</div>
+
+<div class="card">
+<h3>GOLD</h3>
+<p>Commodity information</p>
+</div>
+
+<div class="card">
+<h3>BTC / ETH</h3>
+<p>Digital-asset information</p>
+</div>
+
+</div>
+
+<div class="actions">
+<a class="btn blue"
+href="https://github.com/worldoilprotocol"
+target="_blank"
+rel="noopener">
+WORLD OIL PROTOCOL GITHUB ↗
+</a>
+</div>
+
+</div>
+</section>
+
+
+<!-- TOKENOMICS -->
+
+<section id="tokenomics">
+<div class="container">
+
+<div class="section-head">
+<div class="kicker">06 / TOKENOMICS</div>
+
+<h2>WOP Tokenomics</h2>
+
+<p class="lead">
+The following framework describes the proposed WOP ecosystem allocation.
+</p>
+</div>
+
+<div class="card" style="text-align:center;margin-bottom:17px">
+
+<div class="kicker">TOTAL SUPPLY</div>
+
+<div style="font-size:43px;font-weight:900;color:var(--gold2)">
+1,000,000,000 WOP
+</div>
+
+</div>
+
+
+<div class="table">
+
+<table>
+
+<thead>
+<tr>
+<th>ALLOCATION</th>
+<th>WOP</th>
+<th>%</th>
+<th>VISUAL</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>Liquidity</td>
+<td>300,000,000</td>
+<td>30%</td>
+<td><div class="bar"><i style="width:30%"></i></div></td>
+</tr>
+
+<tr>
+<td>Airdrops</td>
+<td>200,000,000</td>
+<td>20%</td>
+<td><div class="bar"><i style="width:20%"></i></div></td>
+</tr>
+
+<tr>
+<td>Ecosystem</td>
+<td>150,000,000</td>
+<td>15%</td>
+<td><div class="bar"><i style="width:15%"></i></div></td>
+</tr>
+
+<tr>
+<td>Treasury</td>
+<td>150,000,000</td>
+<td>15%</td>
+<td><div class="bar"><i style="width:15%"></i></div></td>
+</tr>
+
+<tr>
+<td>Development</td>
+<td>100,000,000</td>
+<td>10%</td>
+<td><div class="bar"><i style="width:10%"></i></div></td>
+</tr>
+
+<tr>
+<td>Marketing</td>
+<td>50,000,000</td>
+<td>5%</td>
+<td><div class="bar"><i style="width:5%"></i></div></td>
+</tr>
+
+<tr>
+<td>Partnerships</td>
+<td>50,000,000</td>
+<td>5%</td>
+<td><div class="bar"><i style="width:5%"></i></div></td>
+</tr>
+
+<tr>
+<td><strong>TOTAL</strong></td>
+<td><strong>1,000,000,000</strong></td>
+<td><strong>100%</strong></td>
+<td></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="note">
+These percentages describe the proposed token distribution framework.
+Actual distribution, liquidity deployment, treasury management and future
+ecosystem usage may occur progressively according to project development
+and market conditions.
+</div>
+
+</div>
+</section>
+
+
+<!-- UTILITY -->
+
+<section>
+<div class="container">
+
+<div class="section-head">
+<div class="kicker">07 / TOKEN UTILITY</div>
+
+<h2>Built for an Evolving Ecosystem</h2>
+
+<p class="lead">
+WOP is intended to serve as a digital asset within the developing
+World Oil Protocol ecosystem.
+</p>
+</div>
+
+<div class="grid g3">
+
+<div class="card">
+<h3>Ecosystem Participation</h3>
+<p>
+WOP may be used as an ecosystem participation asset for future
+WOP-related applications.
+</p>
+</div>
+
+<div class="card">
+<h3>Community Initiatives</h3>
+<p>
+WOP may support future community campaigns, rewards, airdrops
+and participation programs.
+</p>
+</div>
+
+<div class="card">
+<h3>Ecosystem Development</h3>
+<p>
+A portion of the planned allocation may support development of
+future products, infrastructure and integrations.
+</p>
+</div>
+
+<div class="card">
+<h3>Digital Transactions</h3>
+<p>
+Subject to future implementation, WOP may be integrated into
+selected blockchain-based services developed around the ecosystem.
+</p>
+</div>
+
+<div class="card">
+<h3>Future Applications</h3>
+<p>
+Additional utility may be introduced as the ecosystem develops.
+</p>
+</div>
+
+<div class="card">
+<h3>Development Path</h3>
+<p>
+Future utilities depend on technical development, testing,
+regulatory considerations and available resources.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ROADMAP -->
+
+<section id="roadmap">
+<div class="container">
+
+<div class="section-head">
+<div class="kicker">08 / ROADMAP</div>
+
+<h2>The Road Ahead</h2>
+
+<p class="lead">
+WOP development is structured around progressive ecosystem development,
+from foundation and launch preparation toward long-term utility exploration.
+</p>
+</div>
+
+
+<div class="roadmap">
+
+<div class="card phase">
+
+<div class="phase-no">PHASE 01</div>
+
+<h3>FOUNDATION</h3>
+
+<p>Foundation & Development</p>
+
+<ul>
+<li>WOP concept development</li>
+<li>Token creation</li>
+<li>BEP-20 deployment</li>
+<li>Smart-contract verification</li>
+<li>Project website</li>
+<li>Initial branding</li>
+<li>Community channels</li>
+<li>Initial documentation</li>
+</ul>
+
+</div>
+
+
+<div class="card phase">
+
+<div class="phase-no">PHASE 02</div>
+
+<h3>LAUNCH PREPARATION</h3>
+
+<p>Market Launch Preparation</p>
+
+<ul>
+<li>Finalize white paper</li>
+<li>Complete project information</li>
+<li>Prepare token logo and metadata</li>
+<li>Prepare liquidity</li>
+<li>Establish initial community presence</li>
+<li>Publish launch communications</li>
+</ul>
+
+</div>
+
+
+<div class="card phase">
+
+<div class="phase-no">PHASE 03</div>
+
+<h3>COMMUNITY & ECOSYSTEM</h3>
+
+<p>Community Growth</p>
+
+<ul>
+<li>Expand community</li>
+<li>Educational content</li>
+<li>Community campaigns</li>
+<li>Airdrop initiatives</li>
+<li>Ecosystem partnerships</li>
+<li>Continued website development</li>
+</ul>
+
+</div>
+
+
+<div class="card phase">
+
+<div class="phase-no">PHASE 04</div>
+
+<h3>DATA & UTILITY EXPLORATION</h3>
+
+<p>Intelligence & Utility</p>
+
+<ul>
+<li>Explore energy-related data applications</li>
+<li>Develop intelligence-layer concepts</li>
+<li>Explore WSD settlement applications</li>
+<li>Research blockchain-based energy-sector utilities</li>
+<li>Develop technical prototypes</li>
+</ul>
+
+</div>
+
+
+<div class="card phase">
+
+<div class="phase-no">PHASE 05</div>
+
+<h3>LONG-TERM ECOSYSTEM</h3>
+
+<p>Ecosystem Expansion</p>
+
+<ul>
+<li>Expand ecosystem infrastructure</li>
+<li>Explore integrations</li>
+<li>Develop additional utilities</li>
+<li>Research energy and blockchain partnerships</li>
+<li>Continue decentralized ecosystem development</li>
+</ul>
+
+</div>
+
+
+<div class="card phase">
+
+<div class="phase-no">CONTINUOUS</div>
+
+<h3>RESEARCH & DEVELOPMENT</h3>
+
+<p>Long-Term Exploration</p>
+
+<ul>
+<li>Technology research</li>
+<li>Market intelligence</li>
+<li>Community feedback</li>
+<li>Prototype development</li>
+<li>Ecosystem refinement</li>
+</ul>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- VISION -->
+
+<section>
+<div class="container">
+
+<div class="section-head">
+
+<div class="kicker">09 / VISION</div>
+
+<h2>From Community to Industry</h2>
+
+<p class="lead">
+WOP's long-term direction is centered on exploring connections between
+blockchain technology, market intelligence and the global energy ecosystem.
+</p>
+
+</div>
+
+<div class="grid g3">
+
+<div class="card">
+<h3>ENERGY</h3>
+<p>
+Explore relationships with organizations working across energy,
+commodities and related sectors.
+</p>
+</div>
+
+<div class="card">
+<h3>DATA & AI</h3>
+<p>
+Explore market data, analytics and artificial-intelligence applications.
+</p>
+</div>
+
+<div class="card">
+<h3>BLOCKCHAIN</h3>
+<p>
+Explore technology, infrastructure and decentralized ecosystem integrations.
+</p>
+</div>
+
+</div>
+
+<div class="note">
+Potential collaboration does not represent an existing partnership.
+Official partnerships will only be announced following a confirmed agreement.
+</div>
+
+</div>
+</section>
+
+
+<!-- TRANSPARENCY -->
+
+<section id="transparency">
+<div class="container">
+
+<div class="section-head">
+
+<div class="kicker">10 / TRANSPARENCY</div>
+
+<h2>WOP Transparency</h2>
+
+<p class="lead">
+Official WOP blockchain information, contract details and verification
+are publicly available through BNB Smart Chain blockchain records.
+</p>
+
+</div>
+
+
+<div class="stats">
+
+<div class="stat">
+<small>SMART CONTRACT</small>
+
+<strong style="font-size:12px;word-break:break-all">
+0x473A59638d6eE968a5594a06f3deA83D52ff19B6
+</strong>
+</div>
+
+<div class="stat">
+<small>NETWORK</small>
+<strong>BNB Smart Chain</strong>
+</div>
+
+<div class="stat">
+<small>TOTAL SUPPLY</small>
+<strong>1,000,000,000 WOP</strong>
+</div>
+
+<div class="stat">
+<small>DECIMALS</small>
+<strong>18</strong>
+</div>
+
+<div class="stat">
+<small>LIQUIDITY</small>
+<strong>TO BE PUBLISHED</strong>
+</div>
+
+<div class="stat">
+<small>CONTRACT STATUS</small>
+<strong>VERIFIED ON BSCSCAN</strong>
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<a class="btn"
+href="https://bscscan.com/address/0x473A59638d6eE968a5594a06f3deA83D52ff19B6"
+target="_blank"
+rel="noopener">
+VIEW CONTRACT ON BSCSCAN ↗
+</a>
+
+<a class="btn blue"
+href="https://github.com/worldoilprotocol"
+target="_blank"
+rel="noopener">
+OFFICIAL GITHUB ↗
+</a>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- BUY -->
+
+<section id="buy">
+<div class="container">
+
+<div class="section-head">
+
+<div class="kicker">11 / HOW TO BUY</div>
+
+<h2>How to Buy WOP</h2>
+
+<p class="lead">
+Trading instructions will become active after the official WOP market is launched.
+</p>
+
+</div>
+
+
+<div class="grid g3">
+
+<div class="card">
+<h3>01 — Connect</h3>
+<p>
+Connect your wallet to BNB Smart Chain.
+</p>
+</div>
+
+<div class="card">
+<h3>02 — Prepare BNB</h3>
+<p>
+Hold enough BNB for network fees and the intended transaction.
+</p>
+</div>
+
+<div class="card">
+<h3>03 — Open PancakeSwap</h3>
+<p>
+Use the official WOP trading link published on this website after launch.
+</p>
+</div>
+
+<div class="card">
+<h3>04 — Verify Contract</h3>
+<p>
+Confirm the official WOP contract address before interacting with the token.
+</p>
+</div>
+
+<div class="card">
+<h3>05 — Select Pair</h3>
+<p>
+Choose the official WOP trading pair after the market is launched.
+</p>
+</div>
+
+<div class="card">
+<h3>06 — Confirm</h3>
+<p>
+Review the transaction details and confirm it in your wallet.
+</p>
+</div>
+
+</div>
+
+
+<div class="note">
+Always verify the official WOP contract address before trading.
+Never purchase a token solely because it uses the WOP name or logo.
+</div>
+
+</div>
+</section>
+
+
+<!-- COMMUNITY -->
+
+<section>
+<div class="container">
+
+<div class="section-head">
+
+<div class="kicker">12 / COMMUNITY</div>
+
+<h2>WOP Genesis Community</h2>
+
+<p class="lead">
+Join the early development of the World Oil Protocol ecosystem.
+</p>
+
+</div>
+
+<div class="card">
+
+<p>
+Community participants may have opportunities to participate in educational
+campaigns, testing, community activities and future distribution programs.
+</p>
+
+<div class="actions">
+
+<a class="btn"
+href="https://github.com/worldoilprotocol"
+target="_blank"
+rel="noopener">
+EXPLORE WOP GITHUB ↗
+</a>
+
+<a class="btn blue"
+href="#faq">
+LEARN MORE
+</a>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- FAQ -->
+
+<section id="faq" class="faq">
+<div class="container">
+
+<div class="section-head">
+
+<div class="kicker">13 / FAQ</div>
+
+<h2>Frequently Asked Questions</h2>
+
+</div>
+
+
+<details>
+<summary>What is WOP?</summary>
+<p>
+WOP is a blockchain-based digital asset and the primary token of
+the World Oil Protocol ecosystem.
+</p>
+</details>
+
+
+<details>
+<summary>What is World Oil Protocol?</summary>
+<p>
+World Oil Protocol is a developing blockchain ecosystem concept exploring
+connections between global energy, digital data and blockchain technology.
+</p>
+</details>
+
+
+<details>
+<summary>Is WOP backed by physical oil?</summary>
+<p>
+WOP does not represent ownership of physical oil, petroleum reserves
+or a claim against commodity reserves.
+</p>
+</details>
+
+
+<details>
+<summary>Which blockchain does WOP use?</summary>
+<p>
+WOP is deployed on BNB Smart Chain using the BEP-20 token standard.
+</p>
+</details>
+
+
+<details>
+<summary>What is the total supply?</summary>
+<p>
+The total WOP supply is 1,000,000,000 tokens with 18 decimals.
+</p>
+</details>
+
+
+<details>
+<summary>What is WSD?</summary>
+<p>
+WSD means World Settlement Digital. It is envisioned as a future digital
+settlement and ecosystem utility concept within the broader WOP ecosystem.
+</p>
+</details>
+
+
+<details>
+<summary>Is WSD a stablecoin?</summary>
+<p>
+No. WSD is not currently a fiat-backed stablecoin and does not currently
+represent a claim on fiat currency or physical commodities.
+</p>
+</details>
+
+
+<details>
+<summary>Where can I buy WOP?</summary>
+<p>
+Official trading venues will be published on the WOP website after the
+official WOP market is launched.
+</p>
+</details>
+
+
+<details>
+<summary>Does WOP guarantee profits?</summary>
+<p>
+WOP does not guarantee profits, returns or future value.
+</p>
+</details>
+
+
+<details>
+<summary>Does WOP have partnerships with oil companies?</summary>
+<p>
+Only officially confirmed partnerships will be announced as partnerships.
+Exploratory industry relationships should not be interpreted as existing agreements.
+</p>
+</details>
+
+</div>
+</section>
+
+
+<!-- RISK -->
+
+<section>
+<div class="container">
+
+<div class="section-head">
+
+<div class="kicker">14 / RISK & REGULATORY INFORMATION</div>
+
+<h2>Digital Asset Risk</h2>
+
+</div>
+
+<div class="note risk">
+
+Participation in cryptocurrency markets involves significant risk.
+Potential risks include market volatility, low liquidity, smart-contract
+vulnerabilities, blockchain network risks, regulatory changes,
+market manipulation, cybersecurity threats, development delays,
+adoption risk and changing market conditions.
+
+<br><br>
+
+Future utility, liquidity, adoption and market value depend on development,
+market conditions, ecosystem participation and other factors.
+
+<br><br>
+
+Users should conduct their own research and understand the risks before
+acquiring or using digital assets.
+
+<br><br>
+
+Nothing on this website should be interpreted as investment advice,
+financial advice, legal advice, a guarantee of profit, an offer of securities,
+ownership of physical products, a claim against reserves or a guarantee
+of future value.
+
+<br><br>
+
+The legal and regulatory treatment of digital assets differs between
+jurisdictions. Users are responsible for understanding and complying
+with applicable laws and regulations.
+
+</div>
+
+</div>
+</section>
+
+
+<!-- DOCUMENTATION -->
+
+<section>
+<div class="container">
+
+<div class="section-head">
+
+<div class="kicker">15 / DOCUMENTATION</div>
+
+<h2>Official WOP Documentation</h2>
+
+<p class="lead">
+Explore the official WOP documentation and public project information.
+</p>
+
+</div>
+
+<div class="grid g3">
+
+<div class="card">
+<h3>WOP White Paper</h3>
+<p>
+Read the current World Oil Protocol White Paper and project framework.
+</p>
+
+<div class="actions">
+<a class="btn"
+href="WOP_White_Paper_v1.1_Final.pdf"
+target="_blank"
+rel="noopener">
+VIEW WHITE PAPER ↗
+</a>
+</div>
+
+</div>
+
+
+<div class="card">
+<h3>Smart Contract</h3>
+<p>
+Verify the official WOP smart contract directly on BNB Smart Chain.
+</p>
+
+<div class="actions">
+<a class="btn blue"
+href="https://bscscan.com/address/0x473A59638d6eE968a5594a06f3deA83D52ff19B6"
+target="_blank"
+rel="noopener">
+BSCSCAN ↗
+</a>
+</div>
+
+</div>
+
+
+<div class="card">
+<h3>GitHub</h3>
+<p>
+Access the World Oil Protocol public development organization.
+</p>
+
+<div class="actions">
+<a class="btn"
+href="https://github.com/worldoilprotocol"
+target="_blank"
+rel="noopener">
+GITHUB ↗
+</a>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+<div class="container">
+
+<div class="footergrid">
+
+<div>
+
+<a class="brand" href="#home">
+WOP
+<span>WORLD OIL PROTOCOL</span>
+</a>
+
+<p class="risk">
+ENERGY. DATA. BLOCKCHAIN.
+</p>
+
+<p class="risk">
+A blockchain-based digital ecosystem exploring global energy,
+data and blockchain technology.
+</p>
+
+</div>
+
+
+<div>
+
+<h3>Explore</h3>
+
+<div class="links">
+
+<a href="#wop">WOP</a>
+<a href="#token">Token</a>
+<a href="#ecosystem">Ecosystem</a>
+<a href="#wsd">WSD</a>
+<a href="#tokenomics">Tokenomics</a>
+<a href="#roadmap">Roadmap</a>
+<a href="#transparency">Transparency</a>
+
+</div>
+
+</div>
+
+
+<div>
+
+<h3>Official Links</h3>
+
+<div class="links">
+
+<a
+href="https://bscscan.com/address/0x473A59638d6eE968a5594a06f3deA83D52ff19B6"
+target="_blank"
+rel="noopener">
+BscScan — WOP Contract ↗
+</a>
+
+<a
+href="https://github.com/worldoilprotocol"
+target="_blank"
+rel="noopener">
+World Oil Protocol GitHub ↗
+</a>
+
+<a href="#buy">
+PancakeSwap — Coming Soon
+</a>
+
+<a href="#faq">
+FAQ
+</a>
+
+<a href="WOP_White_Paper_v1.1_Final.pdf"
+target="_blank"
+rel="noopener">
+WOP White Paper ↗
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="copy">
+© 2026 World Oil Protocol. All rights reserved.
+</div>
+
+</div>
+
+</footer>
+
+
+<script>
+
+function toggleNav(){
+
+  const n=document.getElementById('mainNav');
+
+  const open=n.dataset.open==='1';
+
+  n.dataset.open=open?'0':'1';
+
+  if(!open){
+
+    n.style.display='flex';
+    n.style.position='absolute';
+    n.style.top='72px';
+    n.style.left='0';
+    n.style.right='0';
+    n.style.padding='20px';
+    n.style.background='rgba(7,9,13,.98)';
+    n.style.flexDirection='column';
+    n.style.alignItems='stretch';
+
+  }else{
+
+    n.style.display='none';
+
+  }
+}
+
+</script>
+
+</body>
+</html>
